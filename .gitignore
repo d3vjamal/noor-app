@@ -1,0 +1,139 @@
+# OSX
+.DS_Store
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+ios/.xcode.env.local
+ios/Pods/
+ios/Podfile.lock
+
+# Android/IntelliJ
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+.kotlin/
+android/app/release/
+android/app/debug/
+android/.project
+android/.settings
+android/app/.project
+android/app/.settings
+
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# React Native
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Metro
+.metro-health-check*
+.metro/
+
+# Debug
+.vscode/.react/
+*.log
+
+# Testing
+/coverage
+__tests__/coverage/
+
+# Production
+/build
+/dist
+
+# Cache
+.eslintcache
+.cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+.vs/
+
+# CocoaPods
+/ios/Pods/
+/vendor/bundle/
+
+# Fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Gradle
+android/app/gradle/
+android/app/gradlew
+android/app/gradlew.bat
+
+node_modules/
+android/app/build/
+android/.gradle/
+android/.kotlin/
+ios/build/
+ios/Pods/
+ios/Podfile.lock
+*.jks
+*.keystore
+
+# Signing secrets
+credentials/
+
+# Convex
+.env.local
+
+# Raw hadith-api downloads (82 MB); scripts/build-hadith.py turns them into the bundled assets
+content-source/hadith-api/
+
+# Generated Convex import files and raw Quran downloads
+content-source/quran-api/
+content-source/seed/out/
+content-source/seed/names-raw.json

@@ -1,0 +1,263 @@
+[
+ {
+  "id": "wake",
+  "category": "daily",
+  "title": {
+   "bn": "ঘুম থেকে উঠে",
+   "en": "Upon waking up"
+  },
+  "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+  "meaning": {
+   "bn": "সমস্ত প্রশংসা আল্লাহর, যিনি আমাদের মৃত্যুর (ঘুমের) পর জীবিত করেছেন এবং তাঁর কাছেই ফিরে যেতে হবে।",
+   "en": "All praise is for Allah who gave us life after having taken it from us, and unto Him is the resurrection."
+  },
+  "source": {
+   "bn": "সহীহ বুখারী ৬৩১২",
+   "en": "Sahih al-Bukhari 6312"
+  }
+ },
+ {
+  "id": "sleep",
+  "category": "daily",
+  "title": {
+   "bn": "ঘুমানোর সময়",
+   "en": "Before sleeping"
+  },
+  "arabic": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+  "meaning": {
+   "bn": "হে আল্লাহ, আপনার নামেই আমি মরি (ঘুমাই) এবং বেঁচে উঠি।",
+   "en": "In Your name, O Allah, I die and I live."
+  },
+  "source": {
+   "bn": "সহীহ বুখারী ৬৩২৪",
+   "en": "Sahih al-Bukhari 6324"
+  }
+ },
+ {
+  "id": "clothes",
+  "category": "daily",
+  "title": {
+   "bn": "নতুন পোশাক পরার সময়",
+   "en": "When wearing clothes"
+  },
+  "arabic": "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
+  "meaning": {
+   "bn": "সমস্ত প্রশংসা আল্লাহর, যিনি আমাকে এটি পরিয়েছেন এবং আমার কোনো ক্ষমতা ও শক্তি ছাড়াই তা দান করেছেন।",
+   "en": "Praise is to Allah who clothed me with this and provided it for me, with no power or might from myself."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৪০২৩; জামি‘ আত-তিরমিযী ৩৪৫৮",
+   "en": "Sunan Abu Dawud 4023; Jami at-Tirmidhi 3458"
+  }
+ },
+ {
+  "id": "eat-before",
+  "category": "food",
+  "title": {
+   "bn": "খাওয়ার আগে",
+   "en": "Before eating"
+  },
+  "arabic": "بِسْمِ اللَّهِ",
+  "meaning": {
+   "bn": "আল্লাহর নামে (শুরু করছি)।",
+   "en": "In the name of Allah."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৩৭৬৭; জামি‘ আত-তিরমিযী ১৮৫৮",
+   "en": "Sunan Abu Dawud 3767; Jami at-Tirmidhi 1858"
+  }
+ },
+ {
+  "id": "eat-after",
+  "category": "food",
+  "title": {
+   "bn": "খাওয়ার পরে",
+   "en": "After eating"
+  },
+  "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+  "meaning": {
+   "bn": "সমস্ত প্রশংসা আল্লাহর, যিনি আমাদের খাইয়েছেন, পান করিয়েছেন এবং মুসলিম বানিয়েছেন।",
+   "en": "Praise is to Allah who fed us, gave us drink, and made us Muslims."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৩৮৫০; জামি‘ আত-তিরমিযী ৩৪৫৭",
+   "en": "Sunan Abu Dawud 3850; Jami at-Tirmidhi 3457"
+  }
+ },
+ {
+  "id": "home-enter",
+  "category": "home",
+  "title": {
+   "bn": "ঘরে প্রবেশের সময়",
+   "en": "Entering the home"
+  },
+  "arabic": "بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى رَبِّنَا تَوَكَّلْنَا",
+  "meaning": {
+   "bn": "আল্লাহর নামে আমরা প্রবেশ করলাম, আল্লাহর নামে বের হলাম এবং আমাদের রবের ওপরই ভরসা করলাম।",
+   "en": "In the name of Allah we enter, in the name of Allah we leave, and upon our Lord we place our trust."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৫০৯৬",
+   "en": "Sunan Abu Dawud 5096"
+  }
+ },
+ {
+  "id": "home-leave",
+  "category": "home",
+  "title": {
+   "bn": "ঘর থেকে বের হওয়ার সময়",
+   "en": "Leaving the home"
+  },
+  "arabic": "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+  "meaning": {
+   "bn": "আল্লাহর নামে, আমি আল্লাহর ওপর ভরসা করলাম। আল্লাহ ছাড়া কোনো ক্ষমতা ও শক্তি নেই।",
+   "en": "In the name of Allah, I place my trust in Allah; there is no power and no might except with Allah."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৫০৯৫; জামি‘ আত-তিরমিযী ৩৪২৬",
+   "en": "Sunan Abu Dawud 5095; Jami at-Tirmidhi 3426"
+  }
+ },
+ {
+  "id": "toilet-enter",
+  "category": "home",
+  "title": {
+   "bn": "টয়লেটে প্রবেশের সময়",
+   "en": "Entering the toilet"
+  },
+  "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+  "meaning": {
+   "bn": "হে আল্লাহ, আমি আপনার কাছে অপবিত্র পুরুষ ও নারী জিন থেকে আশ্রয় চাই।",
+   "en": "O Allah, I seek refuge in You from the male and female evil ones."
+  },
+  "source": {
+   "bn": "সহীহ বুখারী ১৪২; সহীহ মুসলিম ৩৭৫",
+   "en": "Sahih al-Bukhari 142; Sahih Muslim 375"
+  }
+ },
+ {
+  "id": "toilet-leave",
+  "category": "home",
+  "title": {
+   "bn": "টয়লেট থেকে বের হওয়ার সময়",
+   "en": "Leaving the toilet"
+  },
+  "arabic": "غُفْرَانَكَ",
+  "meaning": {
+   "bn": "হে আল্লাহ, আমি আপনার ক্ষমা প্রার্থনা করছি।",
+   "en": "I ask You for Your forgiveness."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ৩০; জামি‘ আত-তিরমিযী ৭",
+   "en": "Sunan Abu Dawud 30; Jami at-Tirmidhi 7"
+  }
+ },
+ {
+  "id": "masjid-enter",
+  "category": "masjid",
+  "title": {
+   "bn": "মসজিদে প্রবেশের সময়",
+   "en": "Entering the masjid"
+  },
+  "arabic": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+  "meaning": {
+   "bn": "হে আল্লাহ, আমার জন্য আপনার রহমতের দরজাগুলো খুলে দিন।",
+   "en": "O Allah, open for me the doors of Your mercy."
+  },
+  "source": {
+   "bn": "সহীহ মুসলিম ৭১৩",
+   "en": "Sahih Muslim 713"
+  }
+ },
+ {
+  "id": "masjid-leave",
+  "category": "masjid",
+  "title": {
+   "bn": "মসজিদ থেকে বের হওয়ার সময়",
+   "en": "Leaving the masjid"
+  },
+  "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+  "meaning": {
+   "bn": "হে আল্লাহ, আমি আপনার অনুগ্রহ প্রার্থনা করছি।",
+   "en": "O Allah, I ask You for Your bounty."
+  },
+  "source": {
+   "bn": "সহীহ মুসলিম ৭১৩",
+   "en": "Sahih Muslim 713"
+  }
+ },
+ {
+  "id": "travel",
+  "category": "travel",
+  "title": {
+   "bn": "সফরের দোয়া",
+   "en": "Travel supplication"
+  },
+  "arabic": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+  "meaning": {
+   "bn": "পবিত্র তিনি, যিনি এটিকে আমাদের বশীভূত করে দিয়েছেন, অথচ আমরা একে বশ করতে সক্ষম ছিলাম না। আর অবশ্যই আমরা আমাদের রবের কাছে ফিরে যাব।",
+   "en": "Glory to Him who has subjected this to us, and we could never have it by our efforts. And to our Lord we shall surely return."
+  },
+  "source": {
+   "bn": "কুরআন ৪৩:১৩-১৪; সহীহ মুসলিম ১৩৪২",
+   "en": "Quran 43:13-14; Sahih Muslim 1342"
+  }
+ },
+ {
+  "id": "istighfar",
+  "category": "forgiveness",
+  "title": {
+   "bn": "ইস্তিগফার",
+   "en": "Seeking forgiveness"
+  },
+  "arabic": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
+  "meaning": {
+   "bn": "আমি মহান আল্লাহর কাছে ক্ষমা চাই, যিনি ছাড়া কোনো ইলাহ নেই, তিনি চিরঞ্জীব, চিরস্থায়ী; আর আমি তাঁর কাছে তওবা করছি।",
+   "en": "I seek forgiveness from Allah the Mighty, there is no god but Him, the Ever-Living, the Sustainer, and I repent to Him."
+  },
+  "source": {
+   "bn": "সুনান আবূ দাঊদ ১৫১৭; জামি‘ আত-তিরমিযী ৩৫৭৭",
+   "en": "Sunan Abu Dawud 1517; Jami at-Tirmidhi 3577"
+  }
+ },
+ {
+  "id": "rabbana",
+  "category": "forgiveness",
+  "title": {
+   "bn": "দুনিয়া ও আখিরাতের কল্যাণ",
+   "en": "Good in this world and the next"
+  },
+  "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+  "meaning": {
+   "bn": "হে আমাদের রব, আমাদের দুনিয়াতে কল্যাণ দিন, আখিরাতে কল্যাণ দিন এবং আমাদের জাহান্নামের আযাব থেকে রক্ষা করুন।",
+   "en": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."
+  },
+  "source": {
+   "bn": "কুরআন ২:২০১",
+   "en": "Quran 2:201"
+  },
+  "audioUrls": [
+   "https://everyayah.com/data/Alafasy_128kbps/002201.mp3"
+  ]
+ },
+ {
+  "id": "parents",
+  "category": "forgiveness",
+  "title": {
+   "bn": "পিতা-মাতার জন্য দোয়া",
+   "en": "For parents"
+  },
+  "arabic": "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+  "meaning": {
+   "bn": "হে আমার রব, তাঁদের দুজনের প্রতি দয়া করুন, যেমন তাঁরা শৈশবে আমাকে লালন-পালন করেছেন।",
+   "en": "My Lord, have mercy upon them as they brought me up when I was small."
+  },
+  "source": {
+   "bn": "কুরআন ১৭:২৪",
+   "en": "Quran 17:24"
+  },
+  "audioUrls": [
+   "https://everyayah.com/data/Alafasy_128kbps/017024.mp3"
+  ]
+ }
+]

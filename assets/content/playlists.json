@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "playlists": [
+    {
+      "id": "pl-001",
+      "title": "Logical Reasons for Polygyny in Islam",
+      "type": "audio",
+      "provider": "spotify",
+      "url": "https://open.spotify.com/show/6xiLfzFsA9kmKOJicN4m3Q",
+      "thumbnail": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fc97c1ed27a29825140edf535"
+    }
+  ]
+}
