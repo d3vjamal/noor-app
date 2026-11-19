@@ -18,7 +18,7 @@ export const BOOK_TITLE = {
 
 export const APP_CONFIG = {
   packageId: 'com.muntakhab',
-  version: '1.0.8',
+  version: '1.0.9',
   privacyPolicyUrl: '',
   contactEmail: '',
 };

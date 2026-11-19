@@ -7,6 +7,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- Permissions pulled in by libraries imply hardware requirements. None of these is essential, so
+         mark them optional to keep the app installable on every device. -->
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+
     <!-- Android 11+ hides other apps unless declared: needed to open WhatsApp from the share buttons. -->
     <queries>
         <package android:name="com.whatsapp" />
