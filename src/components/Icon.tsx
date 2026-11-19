@@ -5,7 +5,8 @@ export type IconName =
   | 'home' | 'library' | 'salat' | 'dua' | 'tools' | 'settings'
   | 'tasbih' | 'hijri' | 'names' | 'zakat' | 'qibla'
   | 'sun' | 'food' | 'house' | 'mosque' | 'compass' | 'heart' | 'grid'
-  | 'drop' | 'shield' | 'moon' | 'cloud' | 'play' | 'stop' | 'copy' | 'whatsapp' | 'share' | 'check';
+  | 'drop' | 'shield' | 'moon' | 'cloud' | 'play' | 'stop' | 'copy' | 'whatsapp' | 'share' | 'check'
+  | 'crescent' | 'quran' | 'kaaba' | 'lantern';
 
 const MOSQUE = 'M2.5 21h19 M5.5 21v-5.5a6.5 6.5 0 0 1 13 0V21 M12 9V6 M10 21v-3a2 2 0 0 1 4 0v3 M2.5 21V11 M21.5 21V11';
 const RAYS = [0, 45, 90, 135, 180, 225, 270, 315];
@@ -176,6 +177,38 @@ function body(name: IconName, c: string): React.ReactNode {
       );
     case 'check':
       return <Path d="M5 12.5l4.5 4.5L19 7.5" />;
+    case 'crescent':
+      return (
+        <>
+          <Path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" />
+          <Path d="M17 4l.6 1.4L19 6l-1.4.6L17 8l-.6-1.4L15 6l1.4-.6z" fill={c} strokeWidth={0.5} />
+        </>
+      );
+    case 'quran':
+      return (
+        <>
+          <Path d="M5.5 3.5h11a2.5 2.5 0 0 1 2.5 2.5v14H8a2.5 2.5 0 0 1-2.5-2.5V3.5z" />
+          <Path d="M5.5 17.5A2.5 2.5 0 0 1 8 15h11" />
+          <Path d="M12.2 6.5l1 2.1 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z" fill={c} strokeWidth={0.5} />
+        </>
+      );
+    case 'kaaba':
+      return (
+        <>
+          <Path d="M4 8l8-3 8 3v10l-8 3-8-3z" />
+          <Path d="M4 8l8 3 8-3 M12 11v10" />
+          <Path d="M4 10.8l8 3 8-3" strokeWidth={2.2} />
+        </>
+      );
+    case 'lantern':
+      return (
+        <>
+          <Path d="M12 2v2.5 M9.5 6.5h5l1.2 2H8.3z" />
+          <Path d="M8.3 8.5c-1.2 3-1.2 6.5 0 9.5h7.4c1.2-3 1.2-6.5 0-9.5" />
+          <Path d="M9.2 18l-1 2.5h7.6l-1-2.5" />
+          <Path d="M12 10.5c1 1.2 1.3 2 .6 3.1-.4.6-1.3.6-1.7 0-.6-1-.2-2 1.1-3.1z" fill={c} strokeWidth={0.5} />
+        </>
+      );
   }
 }
 

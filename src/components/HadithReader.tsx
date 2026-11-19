@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {HadithBook, HadithRow, loadSection} from '../content/hadithIndex';
+import {sectionNameBn} from '../content/sectionBn';
 import ShareBar from './ShareBar';
 import LangToggle, {LANG_ORDER, TextLang, toggleLang} from './LangToggle';
 import {useSettings} from '../state/settings';
@@ -28,7 +29,7 @@ export default function HadithReader({book, onBack}: Props) {
   const {theme, t, settings} = useSettings();
   const insets = useSafeAreaInsets();
   const [section, setSection] = useState<string | null>(null);
-  const [langs, setLangs] = useState<TextLang[]>([settings.language]);
+  const [langs, setLangs] = useState<TextLang[]>(settings.language === 'bn' ? ['bn'] : ['bn', settings.language]);
   const toggle = (k: TextLang) => setLangs(cur => toggleLang(cur, k));
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function HadithReader({book, onBack}: Props) {
     return () => sub.remove();
   }, [section, onBack]);
 
+  const secName = (n: string) => (settings.language === 'bn' ? sectionNameBn(n) ?? n : n);
   const current = book.sections.find(s => s.id === section);
   const [hadith, setHadith] = useState<HadithRow[]>([]);
 
@@ -83,7 +85,7 @@ export default function HadithReader({book, onBack}: Props) {
           </Text>
           {current && (
             <Text numberOfLines={1} style={{color: theme.textMuted}}>
-              {current.id}. {current.name}
+              {current.id}. {secName(current.name)}
             </Text>
           )}
         </View>
@@ -107,7 +109,7 @@ export default function HadithReader({book, onBack}: Props) {
               <Text style={[styles.num, {color: theme.primary}]}>{item.id}</Text>
               <View style={styles.flex}>
                 <Text style={[styles.name, {color: theme.text}]}>
-                  {item.name}
+                  {secName(item.name)}
                 </Text>
                 <Text style={{color: theme.textMuted}}>
                   {t.library.hadithNo}: {item.count}

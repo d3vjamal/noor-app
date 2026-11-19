@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {APP_CONFIG} from '../../config/appConfig';
 import Faq from '../components/Faq';
 import Screen from '../components/Screen';
@@ -156,6 +156,14 @@ export default function SettingsScreen() {
         <Text style={[styles.body, {color: theme.textMuted}]}>
           {t.settings.contentBody}
         </Text>
+        <Text style={[styles.rowLabel, {color: theme.text, marginTop: 14}]}>
+          {t.settings.developer}
+        </Text>
+        <Pressable
+          accessibilityRole="link"
+          onPress={() => Linking.openURL('https://x.com/d3vjamal').catch(() => {})}>
+          <Text style={[styles.body, {color: theme.primary}]}>{t.settings.developerBody} · @d3vjamal ↗</Text>
+        </Pressable>
       </Section>
 
       <Faq title={t.settings.faqTitle} items={t.settings.faq} />

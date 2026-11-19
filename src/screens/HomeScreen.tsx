@@ -3,6 +3,9 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import Icon, {IconName} from '../components/Icon';
+import DailyFeed from '../components/DailyFeed';
+import HeroSky from '../components/HeroSky';
+import MasjidArt from '../components/MasjidArt';
 import Screen from '../components/Screen';
 import {ROWS, Row, formatTime} from '../salat/times';
 import {SalatContext, loadSalatContext, prayerWindow} from '../salat/window';
@@ -65,6 +68,10 @@ export default function HomeScreen() {
   return (
     <Screen title={t.home.title} onRefresh={reload}>
       <View style={[styles.hero, {backgroundColor: theme.primary}]}>
+        <HeroSky color={theme.onPrimary} />
+        <View style={styles.masjid} pointerEvents="none">
+          <MasjidArt color={theme.onPrimary} width={170} />
+        </View>
         <Text style={[styles.heroSmall, {color: theme.onPrimary}]} numberOfLines={1}>
           {num(hijri.day)} {months[hijri.month - 1]} {num(hijri.year)} ·{' '}
           {now.toLocaleDateString(locale, {weekday: 'short', day: 'numeric', month: 'short'})}
@@ -105,6 +112,8 @@ export default function HomeScreen() {
           </>
         )}
       </View>
+
+      <DailyFeed />
 
       {win && (
         <>
@@ -148,7 +157,8 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  hero: {borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12, gap: 6, marginBottom: 12},
+  masjid: {position: 'absolute', right: -6, bottom: 0, opacity: 0.12},
+  hero: {overflow: 'hidden', borderRadius: 16, paddingHorizontal: 16, paddingVertical: 12, gap: 6, marginBottom: 12},
   heroSmall: {fontSize: 13, opacity: 0.9},
   nextRow: {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8},
   nextName: {flexShrink: 1, fontSize: 20, fontWeight: '700', lineHeight: 28},

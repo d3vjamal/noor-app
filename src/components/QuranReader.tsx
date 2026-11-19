@@ -4,25 +4,42 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAudioQueue} from '../audio/useAudioQueue';
 import {Ayah, RECITERS, Surah, ayahAudioUrl, globalAyah, loadAyahs, useSurahs} from '../content/quran';
+import {surahMeaningBn, surahNameBn} from '../content/surahBn';
 import Icon from './Icon';
 import {useSettings} from '../state/settings';
 import ShareBar from './ShareBar';
 import LangToggle, {LANG_ORDER, TextLang, toggleLang} from './LangToggle';
 
 // Two levels: the surah list, then the ayahs of one surah (Arabic plus any chosen translations).
-export default function QuranReader({onBack}: {onBack: () => void}) {
+export default function QuranReader({onBack, initialSurah}: {onBack: () => void; initialSurah?: number}) {
   const {theme, t, settings} = useSettings();
   const insets = useSafeAreaInsets();
   const {data: surahs, loading} = useSurahs();
   const [surah, setSurah] = useState<Surah | null>(null);
   const [ayahs, setAyahs] = useState<Ayah[] | null>(null);
-  const [langs, setLangs] = useState<TextLang[]>([settings.language]);
+  const [langs, setLangs] = useState<TextLang[]>(settings.language === 'bn' ? ['bn'] : ['bn', settings.language]);
   const [reciterId, setReciterId] = useState(RECITERS[0].id);
   const [startIdx, setStartIdx] = useState(0);
   const audio = useAudioQueue();
   const stopAudio = audio.stop;
   const listRef = useRef<FlatList<Ayah>>(null);
   const reciter = RECITERS.find(r => r.id === reciterId) ?? RECITERS[0];
+
+  const bnUi = settings.language === 'bn';
+  const sName = (x: Surah) => (bnUi ? surahNameBn(x.number) ?? x.nameEn : x.nameEn);
+  const sMeaning = (x: Surah) => (bnUi ? surahMeaningBn(x.number) ?? x.meaningEn : x.meaningEn);
+
+  // Opened from a shortcut or "continue reading": jump straight into that surah.
+  useEffect(() => {
+    if (initialSurah && surahs && !surah) {
+      const found = surahs.find(x => x.number === initialSurah);
+      if (found) {
+        setSurah(found);
+      }
+    }
+    // Only on first load of the list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [surahs]);
 
   useEffect(() => {
     AsyncStorage.getItem('quran.reciter.v1')
@@ -98,7 +115,7 @@ export default function QuranReader({onBack}: {onBack: () => void}) {
           <Text style={{color: theme.primary, fontSize: 24}}>←</Text>
         </Pressable>
         <Text style={[styles.title, {color: theme.text}]}>
-          {surah ? `${surah.number}. ${surah.nameEn}` : t.library.tabQuran}
+          {surah ? `${surah.number}. ${sName(surah)}` : t.library.tabQuran}
         </Text>
       </View>
       {surah && <LangToggle langs={langs} onToggle={k => setLangs(c => toggleLang(c, k))} />}
@@ -145,9 +162,9 @@ export default function QuranReader({onBack}: {onBack: () => void}) {
               style={[styles.card, {backgroundColor: theme.surface, borderColor: theme.border}]}>
               <Text style={[styles.num, {color: theme.primary}]}>{item.number}</Text>
               <View style={styles.flex}>
-                <Text style={[styles.name, {color: theme.text}]}>{item.nameEn}</Text>
+                <Text style={[styles.name, {color: theme.text}]}>{sName(item)}</Text>
                 <Text style={{color: theme.textMuted}}>
-                  {item.meaningEn} · {item.revelation === 'Mecca' ? t.library.meccan : t.library.medinan} ·{' '}
+                  {sMeaning(item)} · {item.revelation === 'Mecca' ? t.library.meccan : t.library.medinan} ·{' '}
                   {t.library.quranSubtitle.replace('%d', String(item.ayahCount))}
                 </Text>
               </View>
@@ -201,7 +218,7 @@ export default function QuranReader({onBack}: {onBack: () => void}) {
                 text={() =>
                   [item.ar, ...LANG_ORDER.filter(k => langs.includes(k)).map(k => item[k] ?? '')]
                     .filter(Boolean)
-                    .join('\n\n') + `\n\n(${t.library.surah} ${surah.nameEn} ${surah.number}:${item.number})`
+                    .join('\n\n') + `\n\n(${t.library.surah} ${sName(surah)} ${surah.number}:${item.number})`
                 }
               />
               </View>

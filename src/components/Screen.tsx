@@ -2,6 +2,7 @@ import React from 'react';
 import {RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useSettings} from '../state/settings';
+import MasjidArt from './MasjidArt';
 
 type Props = {
   title: string;
@@ -21,10 +22,14 @@ export default function Screen({title, children, onRefresh, refreshing = false, 
           <Text accessibilityRole="header" style={[styles.title, {color: theme.text}]}>
             {title}
           </Text>
+          <View style={styles.art} pointerEvents="none">
+            <MasjidArt color={theme.primary} width={110} />
+          </View>
         </View>
       )}
       <ScrollView
         contentContainerStyle={styles.body}
+        keyboardShouldPersistTaps="handled"
         refreshControl={
           onRefresh ? (
             <RefreshControl
@@ -48,7 +53,8 @@ export function EmptyState({text}: {text: string}) {
 
 const styles = StyleSheet.create({
   root: {flex: 1},
-  header: {paddingHorizontal: 16, paddingVertical: 14, borderBottomWidth: StyleSheet.hairlineWidth},
+  header: {paddingHorizontal: 16, paddingVertical: 14, borderBottomWidth: StyleSheet.hairlineWidth, overflow: 'hidden'},
+  art: {position: 'absolute', right: 8, bottom: 0, opacity: 0.12},
   title: {fontSize: 22, fontWeight: '700', lineHeight: 36},
   body: {padding: 16, flexGrow: 1},
   empty: {fontSize: 16, lineHeight: 28, textAlign: 'center', marginTop: 32},

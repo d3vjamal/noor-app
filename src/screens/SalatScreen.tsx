@@ -27,6 +27,7 @@ import {
   MethodKey,
   Prefs,
   ROWS,
+  waqtEnds,
   Row,
   defaultPrefs,
   formatTime,
@@ -291,6 +292,7 @@ export default function SalatScreen() {
         isha: s.isha,
       },
       body: s.reminderBody,
+      endBody: s.endBody,
       channelVibrate: `${s.reminders}: ${s.alarm_vibrate}`,
       channelSound: `${s.reminders}: ${s.alarm_sound}`,
       locale,
@@ -300,7 +302,9 @@ export default function SalatScreen() {
       .then(ok => setNeedAccess(anyOn && !ok))
       .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coords, prefs.method, prefs.hanafi, alarmsKey, settings.language, timeZone]);
+  }, [coords, prefs.method, prefs.hanafi, prefs.endWarn, alarmsKey, settings.language, timeZone]);
+
+  const ends = useMemo(() => (coords ? waqtEnds(coords, prefs, now) : null), [coords, prefs, now]);
 
   const cycleAlarm = async (r: Row) => {
     const next = NEXT_MODE[prefs.alarms[r]];
@@ -437,7 +441,15 @@ export default function SalatScreen() {
                   borderWidth: isNext ? 2 : StyleSheet.hairlineWidth,
                 },
               ]}>
-              <Text style={[styles.rowName, {color: theme.text}]}>{s[k]}</Text>
+              <View style={styles.rowMain}>
+                <Text style={[styles.rowName, {color: theme.text}]}>{s[k]}</Text>
+                {ends && (
+                  <Text style={{color: theme.textMuted, fontSize: 13}}>
+                    {fmt(times[k])} – {fmt(ends[k])}
+                    {now >= times[k] && now < ends[k] ? ` · ${s.now}` : ''}
+                  </Text>
+                )}
+              </View>
               <Text style={[styles.rowTime, {color: theme.text}]}>
                 {fmt(times[k])}
               </Text>
@@ -460,6 +472,12 @@ export default function SalatScreen() {
           <Text style={[styles.note, {color: theme.textMuted}]}>
             {s.remindersHint}
           </Text>
+          <Text style={[styles.label, {color: theme.textMuted}]}>{s.endWarn}</Text>
+          <View style={styles.wrap}>
+            {[0, 10, 20, 30].map(m =>
+              chip(m === 0 ? s.alarm_off : `${m} ${s.min}`, prefs.endWarn === m, () => updatePrefs({endWarn: m})),
+            )}
+          </View>
           <Text style={[styles.label, {color: theme.textMuted}]}>{s.method}</Text>
           <View style={styles.wrap}>
             {(Object.keys(METHODS) as MethodKey[]).map(k =>
@@ -593,7 +611,8 @@ const styles = StyleSheet.create({
     minHeight: 64,
     gap: 8,
   },
-  rowName: {fontSize: 18, fontWeight: '600', flex: 1},
+  rowMain: {flex: 1},
+  rowName: {fontSize: 18, fontWeight: '600'},
   rowTime: {fontSize: 20, fontWeight: '700', textAlign: 'right'},
   bell: {
     flexShrink: 0,

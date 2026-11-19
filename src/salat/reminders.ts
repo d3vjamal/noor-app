@@ -5,7 +5,7 @@ import notifee, {
   TimestampTrigger,
   TriggerType,
 } from '@notifee/react-native';
-import {Coords, Prefs, ROWS, Row, formatTime, timesFor} from './times';
+import {Coords, Prefs, ROWS, Row, formatTime, timesFor, waqtEnds} from './times';
 
 const DAYS = 7;
 const CH_VIBRATE = 'salat-vibrate';
@@ -60,6 +60,7 @@ export async function requestReminderAccess(): Promise<boolean> {
 type Labels = {
   names: Record<Row, string>;
   body: string; // contains %s for the prayer name
+  endBody: string; // contains %s for the prayer name and %d for the minutes left
   channelVibrate: string;
   channelSound: string;
   locale: string;
@@ -91,7 +92,24 @@ export async function rescheduleReminders(
   for (let i = 0; i < DAYS; i++) {
     const day = new Date(now + i * 86400000);
     const times = timesFor(coords, prefs, day);
+    const ends = waqtEnds(coords, prefs, day);
     for (const r of wanted) {
+      const warnAt = ends[r].getTime() - prefs.endWarn * 60000;
+      if (prefs.endWarn > 0 && r !== 'sunrise' && warnAt > now + 5000) {
+        await notifee.createTriggerNotification(
+          {
+            id: `${r}-end-${ends[r].toISOString().slice(0, 10)}`,
+            title: `${labels.names[r]} · ${formatTime(ends[r], labels.locale, labels.timeZone)}`,
+            body: labels.endBody.replace('%s', labels.names[r]).replace('%d', String(prefs.endWarn)),
+            android: {
+              channelId: prefs.alarms[r] === 'sound' ? CH_SOUND : CH_VIBRATE,
+              pressAction: {id: 'default'},
+              smallIcon: 'ic_stat_salat',
+            },
+          },
+          {type: TriggerType.TIMESTAMP, timestamp: warnAt, alarmManager: {allowWhileIdle: true}},
+        );
+      }
       const at = times[r];
       if (at.getTime() <= now + 5000) {
         continue;

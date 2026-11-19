@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {BackHandler, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {BackHandler, Linking, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {magnetometer, setUpdateIntervalForType, SensorTypes} from 'react-native-sensors';
 import Icon, {IconName} from '../components/Icon';
@@ -8,15 +8,23 @@ import Screen from '../components/Screen';
 import HijriTool from './tools/HijriTool';
 import NamesTool from './tools/NamesTool';
 import TasbihTool from './tools/TasbihTool';
+import ZakatTool from './tools/ZakatTool';
+import QazaTool from './tools/QazaTool';
+import IftarTool from './tools/IftarTool';
+import KhatamTool from './tools/KhatamTool';
+import FitrahTool from './tools/FitrahTool';
+import PrayerLogTool from './tools/PrayerLogTool';
+import SunnahFastTool from './tools/SunnahFastTool';
+import GuideTool from './tools/GuideTool';
+import {ADHKAR, SALAH, WUDU} from '../tools/guides';
 import {useSettings} from '../state/settings';
 import {Coords} from '../salat/times';
 import {headingFromMag, kaabaDistanceKm, qiblaBearing} from '../tools/qibla';
-import {NisabBasis, ZakatInput, calcZakat} from '../tools/zakat';
 
-type Tool = 'zakat' | 'qibla' | 'tasbih' | 'hijri' | 'names';
+type Tool = 'zakat' | 'qibla' | 'tasbih' | 'hijri' | 'names' | 'qaza' | 'iftar' | 'khatam' | 'fitrah' | 'prayerlog' | 'sunnahfast' | 'wudu' | 'salah' | 'adhkar' | 'mosque';
 
 export default function ToolsScreen() {
-  const {t, theme} = useSettings();
+  const {t, theme, settings} = useSettings();
   const [tool, setTool] = useState<Tool | null>(null);
 
   // Android back returns to the tool list instead of leaving the tab.
@@ -37,6 +45,16 @@ export default function ToolsScreen() {
     {key: 'names', icon: 'names', title: t.tools.names},
     {key: 'zakat', icon: 'zakat', title: t.tools.zakat},
     {key: 'qibla', icon: 'qibla', title: t.tools.qibla},
+    {key: 'iftar', icon: 'moon', title: t.tools.iftar},
+    {key: 'qaza', icon: 'check', title: t.tools.qaza},
+    {key: 'khatam', icon: 'quran', title: t.tools.khatam},
+    {key: 'fitrah', icon: 'heart', title: t.tools.fitrah},
+    {key: 'prayerlog', icon: 'salat', title: t.tools.prayerLog},
+    {key: 'sunnahfast', icon: 'sun', title: t.tools.sunnahFast},
+    {key: 'wudu', icon: 'drop', title: t.tools.wudu},
+    {key: 'salah', icon: 'mosque', title: t.tools.salahGuide},
+    {key: 'adhkar', icon: 'dua', title: t.tools.adhkar},
+    {key: 'mosque', icon: 'kaaba', title: t.tools.mosques},
   ];
 
   if (tool === 'tasbih') {
@@ -51,6 +69,34 @@ export default function ToolsScreen() {
   if (tool === 'zakat') {
     return <ZakatTool onBack={() => setTool(null)} />;
   }
+  const lang = settings.language;
+  if (tool === 'prayerlog') {
+    return <PrayerLogTool onBack={() => setTool(null)} />;
+  }
+  if (tool === 'sunnahfast') {
+    return <SunnahFastTool onBack={() => setTool(null)} />;
+  }
+  if (tool === 'wudu') {
+    return <GuideTool title={t.tools.wudu} steps={WUDU[lang]} onBack={() => setTool(null)} />;
+  }
+  if (tool === 'salah') {
+    return <GuideTool title={t.tools.salahGuide} steps={SALAH[lang]} onBack={() => setTool(null)} />;
+  }
+  if (tool === 'adhkar') {
+    return <GuideTool title={t.tools.adhkar} steps={ADHKAR[lang]} onBack={() => setTool(null)} />;
+  }
+  if (tool === 'qaza') {
+    return <QazaTool onBack={() => setTool(null)} />;
+  }
+  if (tool === 'iftar') {
+    return <IftarTool onBack={() => setTool(null)} />;
+  }
+  if (tool === 'khatam') {
+    return <KhatamTool onBack={() => setTool(null)} />;
+  }
+  if (tool === 'fitrah') {
+    return <FitrahTool onBack={() => setTool(null)} />;
+  }
   if (tool === 'qibla') {
     return <QiblaTool onBack={() => setTool(null)} />;
   }
@@ -62,7 +108,13 @@ export default function ToolsScreen() {
             key={x.key}
             accessibilityRole="button"
             accessibilityLabel={x.title}
-            onPress={() => setTool(x.key)}
+            onPress={() =>
+              x.key === 'mosque'
+                ? Linking.openURL('geo:0,0?q=mosque').catch(() =>
+                    Linking.openURL('https://www.google.com/maps/search/mosque').catch(() => {}),
+                  )
+                : setTool(x.key)
+            }
             style={[styles.tile, {backgroundColor: theme.surface, borderColor: theme.border}]}>
             <View style={[styles.iconWrap, {backgroundColor: theme.background}]}>
               <Icon name={x.icon} color={theme.primary} size={28} />
@@ -72,95 +124,6 @@ export default function ToolsScreen() {
             </Text>
           </Pressable>
         ))}
-      </View>
-    </Screen>
-  );
-}
-
-const FIELDS = ['cash', 'gold', 'silver', 'goods', 'receivables', 'debts', 'goldPrice', 'silverPrice'] as const;
-const FIELD_KEY: Record<(typeof FIELDS)[number], keyof ZakatInput> = {
-  cash: 'cash',
-  gold: 'goldGrams',
-  silver: 'silverGrams',
-  goods: 'goodsValue',
-  receivables: 'receivables',
-  debts: 'debts',
-  goldPrice: 'goldPrice',
-  silverPrice: 'silverPrice',
-};
-const ZAKAT_KEY = 'tools.zakat.v1';
-
-function ZakatTool({onBack}: {onBack: () => void}) {
-  const {t, theme} = useSettings();
-  const [vals, setVals] = useState<Record<string, string>>({});
-  const [basis, setBasis] = useState<NisabBasis>('silver');
-
-  // Remember the metal prices between visits.
-  useEffect(() => {
-    AsyncStorage.getItem(ZAKAT_KEY)
-      .then(raw => raw && setVals(JSON.parse(raw)))
-      .catch(() => {});
-  }, []);
-  const set = (k: string, v: string) => {
-    const next = {...vals, [k]: v.replace(/[^0-9.]/g, '')};
-    setVals(next);
-    AsyncStorage.setItem(
-      ZAKAT_KEY,
-      JSON.stringify({goldPrice: next.goldPrice, silverPrice: next.silverPrice}),
-    ).catch(() => {});
-  };
-
-  const input = {} as ZakatInput;
-  FIELDS.forEach(f => {
-    input[FIELD_KEY[f]] = parseFloat(vals[f] || '') || 0;
-  });
-  const r = calcZakat(input, basis);
-  const fmt = (n: number) => n.toLocaleString(undefined, {maximumFractionDigits: 2});
-
-  return (
-    <Screen title={t.tools.zakat}>
-      <BackLink onBack={onBack} />
-      <Text style={{color: theme.textMuted, marginBottom: 12}}>{t.tools.zakatNote}</Text>
-      {FIELDS.map(f => (
-        <View key={f} style={{marginBottom: 10}}>
-          <Text style={{color: theme.text, marginBottom: 4}}>{t.tools[f]}</Text>
-          <TextInput
-            keyboardType="decimal-pad"
-            value={vals[f] ?? ''}
-            onChangeText={v => set(f, v)}
-            placeholder="0"
-            placeholderTextColor={theme.textMuted}
-            style={[styles.input, {color: theme.text, borderColor: theme.border, backgroundColor: theme.surface}]}
-          />
-        </View>
-      ))}
-      <Text style={{color: theme.text, marginVertical: 4}}>{t.tools.basis}</Text>
-      <View style={styles.chips}>
-        {(['silver', 'gold'] as const).map(b => {
-          const on = b === basis;
-          return (
-            <Pressable
-              key={b}
-              onPress={() => setBasis(b)}
-              style={[styles.chip, {borderColor: on ? theme.primary : theme.border, backgroundColor: on ? theme.primary : 'transparent'}]}>
-              <Text style={{color: on ? theme.onPrimary : theme.text}}>
-                {b === 'silver' ? t.tools.basisSilver : t.tools.basisGold}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </View>
-      <View style={[styles.card, {backgroundColor: theme.surface, borderColor: theme.border}]}>
-        <Text style={{color: theme.text}}>{t.tools.total}: {fmt(r.gross)}</Text>
-        <Text style={{color: theme.text}}>{t.tools.net}: {fmt(r.net)}</Text>
-        <Text style={{color: theme.text}}>{t.tools.nisab}: {fmt(r.nisab)}</Text>
-        {r.eligible ? (
-          <Text style={[styles.cardTitle, {color: theme.primary, marginTop: 8}]}>
-            {t.tools.zakatDue}: {fmt(r.due)}
-          </Text>
-        ) : (
-          <Text style={{color: theme.textMuted, marginTop: 8}}>{t.tools.notDue}</Text>
-        )}
       </View>
     </Screen>
   );

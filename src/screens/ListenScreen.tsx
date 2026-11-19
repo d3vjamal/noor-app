@@ -13,6 +13,8 @@ import {
 import {useIsFocused} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import PlaylistPlayer from '../components/PlaylistPlayer';
+import PodcastsTab from '../components/PodcastsTab';
+import RecitersTab from '../components/RecitersTab';
 import {Playlist} from '../content/types';
 import {usePlaylists} from '../content/playlists';
 import {useQuotes} from '../content/names';
@@ -20,10 +22,7 @@ import {useSettings} from '../state/settings';
 import {Radio, useRadio} from '../theme/radio';
 
 type Provider = Playlist['provider'];
-const TABS: {key: Provider; label: string}[] = [
-  {key: 'youtube', label: 'YouTube'},
-  {key: 'spotify', label: 'Spotify'},
-];
+type TabKey = Provider | 'reciters' | 'lectures';
 
 type Props = {embedded?: boolean; onImmersive?: (on: boolean) => void};
 
@@ -35,7 +34,13 @@ export default function ListenScreen({embedded = false, onImmersive}: Props) {
   const focused = useIsFocused();
   const {items: playlists, refresh, refreshing} = usePlaylists();
   const [current, setCurrent] = useState<Playlist | null>(null);
-  const [tab, setTab] = useState<Provider>('youtube');
+  const [tab, setTab] = useState<TabKey>('reciters');
+  const TABS: {key: TabKey; label: string}[] = [
+    {key: 'reciters', label: t.listen.reciters},
+    {key: 'lectures', label: t.listen.lectures},
+    {key: 'youtube', label: 'YouTube'},
+    {key: 'spotify', label: 'Spotify'},
+  ];
 
   // A player is open: the hub hides its own switch.
   const immersive = !!current;
@@ -45,7 +50,7 @@ export default function ListenScreen({embedded = false, onImmersive}: Props) {
 
   // Open on the first provider that actually has playlists.
   useEffect(() => {
-    if (!playlists.some(p => p.provider === tab) && playlists.length) {
+    if ((tab === 'youtube' || tab === 'spotify') && !playlists.some(p => p.provider === tab) && playlists.length) {
       setTab(playlists[0].provider);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -114,7 +119,9 @@ export default function ListenScreen({embedded = false, onImmersive}: Props) {
                 tintColor={radio.amber}
               />
             }>
-            {items.length > 0 && (
+            {tab === 'reciters' && <RecitersTab />}
+            {tab === 'lectures' && <PodcastsTab />}
+            {tab !== 'reciters' && tab !== 'lectures' && items.length > 0 && (
               <Pressable
                 accessibilityRole="button"
                 accessibilityLabel={t.listen.playRadio}
@@ -125,10 +132,10 @@ export default function ListenScreen({embedded = false, onImmersive}: Props) {
                 <Text style={styles.heroHint}>{t.listen.radioHint}</Text>
               </Pressable>
             )}
-            {items.length === 0 && (
+            {tab !== 'reciters' && tab !== 'lectures' && items.length === 0 && (
               <Text style={styles.empty}>{t.listen.empty}</Text>
             )}
-            {quote && (
+            {quote && tab !== 'reciters' && tab !== 'lectures' && (
               <View style={styles.card}>
                 <Text style={styles.muted}>{t.listen.quoteTitle}</Text>
                 <Text style={{color: radio.text, fontSize: 17, lineHeight: 30}}>
@@ -139,7 +146,7 @@ export default function ListenScreen({embedded = false, onImmersive}: Props) {
                 )}
               </View>
             )}
-            {items.map(p => (
+            {(tab === 'reciters' || tab === 'lectures' ? [] : items).map(p => (
               <Pressable
                 key={p.slug}
                 accessibilityRole="button"
@@ -185,16 +192,18 @@ const makeStyles = (radio: Radio) =>
       paddingVertical: 12,
     },
     tab: {
+      flex: 1,
       height: 40,
-      paddingHorizontal: 20,
+      paddingHorizontal: 4,
       borderRadius: 20,
+      alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: radio.glass,
       borderColor: radio.glassBorder,
       borderWidth: 1,
     },
     tabOn: {backgroundColor: radio.amber, borderColor: radio.amberHi},
-    tabText: {color: radio.text, fontSize: 15, fontWeight: '600'},
+    tabText: {color: radio.text, fontSize: 14, fontWeight: '600'},
     body: {padding: 16, paddingTop: 4, flexGrow: 1},
     hero: {
       padding: 18,
