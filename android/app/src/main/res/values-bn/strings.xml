@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">নূর</string>
+    <string name="sc_salat">নামায</string>
+    <string name="sc_library">কুরআন</string>
+    <string name="sc_dua">দোয়া</string>
+    <string name="sc_tools">টুলস</string>
+    <string name="widget_next">পরবর্তী নামায</string>
+    <string name="widget_desc">পরবর্তী নামাযের সময় ও শর্টকাট</string>
 </resources>

@@ -9,6 +9,7 @@ import MasjidArt from '../components/MasjidArt';
 import Screen from '../components/Screen';
 import {ROWS, Row, formatTime} from '../salat/times';
 import {SalatContext, loadSalatContext, prayerWindow} from '../salat/window';
+import {updateWidget} from '../salat/widget';
 import {useSettings} from '../state/settings';
 import {toHijri} from '../tools/hijri';
 
@@ -46,6 +47,11 @@ export default function HomeScreen() {
     const id = setInterval(() => setNow(new Date()), 15000);
     return () => clearInterval(id);
   }, []);
+
+  // Keep the home-screen widget in step with the chosen place, method and language.
+  useEffect(() => {
+    updateWidget(ctx, t.salat as unknown as Record<Row, string>);
+  }, [ctx, t]);
 
   const win = useMemo(
     () => (ctx?.coords ? prayerWindow(ctx.coords, ctx.prefs, now) : null),

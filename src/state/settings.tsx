@@ -1,6 +1,6 @@
 import React, {createContext, useCallback, useContext, useEffect, useMemo, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {APP_NAME} from '../../config/appConfig';
+import {APP_NAME, APP_TAGLINE} from '../../config/appConfig';
 import {Lang, Strings, strings} from '../i18n';
 import {Theme, ThemeName, themes} from '../theme/themes';
 
@@ -22,6 +22,7 @@ type Ctx = {
   t: Strings;
   theme: Theme;
   appName: string;
+  tagline: string;
   ready: boolean;
 };
 
@@ -53,6 +54,7 @@ export function SettingsProvider({children}: {children: React.ReactNode}) {
       t: strings[settings.language],
       theme: themes[settings.theme],
       appName: APP_NAME[settings.language],
+      tagline: APP_TAGLINE[settings.language],
       ready,
     }),
     [settings, setSettings, ready],

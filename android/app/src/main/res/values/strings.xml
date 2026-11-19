@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Noor</string>
+    <string name="sc_salat">Prayer times</string>
+    <string name="sc_library">Quran &amp; Hadith</string>
+    <string name="sc_dua">Duas</string>
+    <string name="sc_tools">Tools</string>
+    <string name="widget_next">Next prayer</string>
+    <string name="widget_desc">Next prayer time and quick shortcuts</string>
 </resources>

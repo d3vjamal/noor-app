@@ -145,7 +145,12 @@
       }
     ],
     "developer": "ডেভেলপার",
-    "developerBody": "তৈরি করেছেন জামাল"
+    "developerBody": "তৈরি করেছেন জামাল",
+    "themeOcean": "সাগর",
+    "themeRose": "গোলাপ",
+    "themeRoyal": "রাজকীয়",
+    "themeForest": "বন",
+    "themeMidnight": "মধ্যরাত"
   },
   "reader": {
     "prev": "আগের পাতা",

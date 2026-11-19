@@ -145,7 +145,12 @@
       }
     ],
     "developer": "Developer",
-    "developerBody": "Built by Jamal"
+    "developerBody": "Built by Jamal",
+    "themeOcean": "Ocean",
+    "themeRose": "Rose",
+    "themeRoyal": "Royal",
+    "themeForest": "Forest",
+    "themeMidnight": "Midnight"
   },
   "reader": {
     "prev": "Previous page",

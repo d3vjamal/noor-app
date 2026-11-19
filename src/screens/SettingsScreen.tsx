@@ -71,11 +71,16 @@ function Segmented<T extends string>({
 }
 
 export default function SettingsScreen() {
-  const {t, settings, setSettings, theme, appName} = useSettings();
+  const {t, settings, setSettings, theme, appName, tagline} = useSettings();
   const themeOptions: {value: ThemeName; label: string}[] = [
     {value: 'light', label: t.settings.themeLight},
     {value: 'sepia', label: t.settings.themeSepia},
     {value: 'dark', label: t.settings.themeDark},
+    {value: 'ocean', label: t.settings.themeOcean},
+    {value: 'rose', label: t.settings.themeRose},
+    {value: 'royal', label: t.settings.themeRoyal},
+    {value: 'forest', label: t.settings.themeForest},
+    {value: 'midnight', label: t.settings.themeMidnight},
   ];
   return (
     <Screen title={t.settings.title}>
@@ -83,7 +88,8 @@ export default function SettingsScreen() {
         <Text style={[styles.heroName, {color: theme.onPrimary}]}>
           {appName}
         </Text>
-        <Text style={{color: theme.onPrimary, fontSize: 14}}>
+        <Text style={{color: theme.onPrimary, fontSize: 15, opacity: 0.95}}>{tagline}</Text>
+        <Text style={{color: theme.onPrimary, fontSize: 14, opacity: 0.8}}>
           {t.settings.version} {APP_CONFIG.version}
         </Text>
       </View>
@@ -195,9 +201,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  swatches: {flexDirection: 'row', gap: 10},
+  swatches: {flexDirection: 'row', flexWrap: 'wrap', gap: 10},
   swatch: {
-    flex: 1,
+    width: '30%',
+    flexGrow: 1,
     minHeight: 84,
     borderRadius: 14,
     borderWidth: 1.5,

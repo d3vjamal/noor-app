@@ -10,6 +10,7 @@ import LibraryHubScreen from './src/screens/LibraryHubScreen';
 import SalatScreen from './src/screens/SalatScreen';
 import ToolsScreen from './src/screens/ToolsScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import SplashOverlay from './src/components/SplashOverlay';
 import {SettingsProvider, useSettings} from './src/state/settings';
 
 const Tab = createBottomTabNavigator();
@@ -36,9 +37,13 @@ function Tabs() {
   };
   return (
     <NavigationContainer
+      linking={{
+        prefixes: ['noor://'],
+        config: {screens: {Home: 'home', Library: 'library', Salat: 'salat', Dua: 'dua', Tools: 'tools', Settings: 'settings'}},
+      }}
       theme={{
         ...DefaultTheme,
-        dark: theme.name === 'dark',
+        dark: theme.statusBar === 'light-content',
         colors: {
           ...DefaultTheme.colors,
           background: theme.background,
@@ -76,6 +81,7 @@ export default function App() {
     <SafeAreaProvider>
       <SettingsProvider>
         <Tabs />
+        <SplashOverlay />
       </SettingsProvider>
     </SafeAreaProvider>
   );

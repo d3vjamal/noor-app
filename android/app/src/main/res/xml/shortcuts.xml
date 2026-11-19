@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="salat" android:enabled="true" android:shortcutShortLabel="@string/sc_salat" android:shortcutLongLabel="@string/sc_salat">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.muntakhab" android:targetClass="com.muntakhab.MainActivity" android:data="noor://salat" />
+    </shortcut>
+    <shortcut android:shortcutId="library" android:enabled="true" android:shortcutShortLabel="@string/sc_library" android:shortcutLongLabel="@string/sc_library">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.muntakhab" android:targetClass="com.muntakhab.MainActivity" android:data="noor://library" />
+    </shortcut>
+    <shortcut android:shortcutId="dua" android:enabled="true" android:shortcutShortLabel="@string/sc_dua" android:shortcutLongLabel="@string/sc_dua">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.muntakhab" android:targetClass="com.muntakhab.MainActivity" android:data="noor://dua" />
+    </shortcut>
+    <shortcut android:shortcutId="tools" android:enabled="true" android:shortcutShortLabel="@string/sc_tools" android:shortcutLongLabel="@string/sc_tools">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.muntakhab" android:targetClass="com.muntakhab.MainActivity" android:data="noor://tools" />
+    </shortcut>
+</shortcuts>
